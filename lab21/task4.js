@@ -1,0 +1,13 @@
+import { Readable, Writable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
+import { UpperCaseTransform, JsonParserTransform, FilterTransform } from './transforms.js';
+const sink = label => new Writable({ objectMode: true, write(value, encoding, callback) { console.log(`[${label}] ${typeof value === 'object' ? JSON.stringify(value) : value.trimEnd()}`); callback(); } });
+await pipeline(Readable.from(['gruppa 477\nstudent ivan\n']), new UpperCaseTransform(), sink('UPPER'));
+const objects = [{ id: 1, name: 'Иван', group: '477' }, { id: 2, name: 'Мария', group: '478' }, { id: 3, name: 'Петр', group: '477' }];
+console.log('JSON PARSER: stroki -> obekty');
+await pipeline(Readable.from(objects.map(o => JSON.stringify(o) + '\n')), new JsonParserTransform(), sink('PARSED OBJECT'));
+console.log('FILTER: gruppa 477'); await pipeline(Readable.from(objects), new FilterTransform(o => o.group === '477'), sink('OBJECT'));
+for await (const value of Readable.from(['Dannye 1', 'Dannye 2', 'Dannye 3'])) console.log(`[ASYNC] ${value}`);
+console.log('ASYNC potok zavershen');
+console.log('CHAIN: readable -> uppercase -> filter -> writable');
+await pipeline(Readable.from(['gruppa 477\ngruppa 478\nstudent 477\n']), new UpperCaseTransform(), new FilterTransform(line => line.includes('477', 6)), sink('CHAIN'));
