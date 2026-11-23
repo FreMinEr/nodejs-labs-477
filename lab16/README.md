@@ -19,3 +19,7 @@ Kniga: title, author, year, genre, isbn, available. Zhanry: roman, fantastika, d
 `/api/books/recommendations?genre=roman`, `/api/books/available`, `/api/admin`. Dokumentaciya `/api-docs/`, OpenAPI `/openapi.json` generiruetsya iz zaregistrirovannyh marshrutov. In-memory dannye i kesh sbrasyvayutsya pri perezapuske; paroli hranyatsya v pamyati kak scrypt-heshi s individualnoi solyu.
 
 Proverka: `npm test`. Testy zapuskayut vse 5 zadanii cherez Node.js, proveryayut CRUD, HTTP oshibki, szhatie, limit, JWT/roli, ISBN, CSV import/eksport, Swagger, kesh i ego ochistku. Vremennye paroli generiruyutsya testom i ne popadayut v logi.
+
+## Скриншоты для отчёта
+
+[Открыть все скриншоты (21 PNG)](screenshots/README.md)
