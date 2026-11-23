@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev --no-audit --no-fund
 FROM node:22-alpine AS runtime
+LABEL org.opencontainers.image.source="https://github.com/FreMinEr/nodejs-labs-477-ci"
 ENV NODE_ENV=production HOST=0.0.0.0
 WORKDIR /app
 COPY --from=dependencies /app/node_modules ./node_modules
