@@ -32,3 +32,7 @@ Zadaniya 2 i 5 ne perezapisyvayut sushchestvuyushchie katalogi proekta i rezervn
 Provereno zapuskom cherez Node.js: vse 5 zadanii; schetchiki failov i baitov; 100000 strok, summa, srednee, minimum, maksimum i mediana; sovpadenie vseh 24 failov v source, backup i ZIP; obnaruzhenie dobavleniya, udaleniya i izmeneniya; oshibki otsutstvuyushchei direktorii i povtornogo sozdaniya.
 
 Snimki realnyh logov dlya otcheta nahodyatsya v `../screenshots_lab14/` otnositelno kornya repozitoriya. V metodichke net otdelnogo perechnya snimkov, poetomu podgotovleny rezultaty kazhdogo zadaniya, poisk po variantu, proverka razlichii i prosmotr ZIP.
+
+## Скриншоты для отчёта
+
+[Открыть все скриншоты (12 PNG)](screenshots/README.md)
