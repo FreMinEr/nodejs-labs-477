@@ -1,0 +1,10 @@
+import { resources, memory, gb, group } from './system.js';
+const info = resources();
+console.log(`Gruppa: ${group}\nLogicheskih yader: ${info.cpuCount}\nModel: ${info.models.join(', ')}`);
+info.speedsMHz.forEach((speed, index) => console.log(`Yadro ${index + 1}: ${speed} MHz`));
+console.log(`Srednyaya chastota: ${info.averageMHz.toFixed(2)} MHz`);
+const mem = process.argv.includes('--demo-low-memory') ? memory(info.memory.total, info.memory.total * .15) : info.memory;
+if (process.argv.includes('--demo-low-memory')) console.log('TESTOVYI SCENARII: svobodnaya pamyat zadana kak 15%; realnaya pamyat ne izmenyaetsya');
+console.log(`Pamyat vsego: ${gb(mem.total)} GB\nSvobodno: ${gb(mem.free)} GB\nIspolzovano: ${gb(mem.used)} GB (${mem.usedPercent.toFixed(1)}%)`);
+console.log(`Srednyaya zagruzka 1/5/15 min: ${info.loadavg.join(', ')}${info.loadavgSupported ? '' : ' (Nedostupno v Windows)'}`);
+console.log(mem.freePercent < 20 ? 'Vnimanie: svobodno pamyati menshe 20%' : 'Pamyat v norme');
