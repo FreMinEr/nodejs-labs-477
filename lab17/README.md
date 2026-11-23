@@ -15,3 +15,7 @@ Deploy vypolnyaet realnoe lokalnoe razvertyvanie: kopiruet sborku v `deployed/<e
 `npm test`: 17 testov Mocha dlya validacii, spravki, kodov vozvrata, init/build/test/deploy, dry-run i obrabotki oshibok. `npm link` sozdaet komandu `my-cli`. `npm run package` sobiraet `dist/my-cli.exe` cherez podderzhivaemyi fork pkg (`@yao-pkg/pkg`). Provereny --version i init pri PATH tolko s Windows System32, bez dostupa k node.exe. Komanda test sozdavaemogo proekta trebuet Node.js; init/build/deploy i spravka samogo binarnika rabotayut avtonomno.
 
 Faily demo i dist ne vhodyat v Git. Snimki: `../screenshots_lab17/` otnositelno kornya repozitoriya. Interaktivnye snimki polucheny iz realnogo ConPTY s sohraneniem cvetov i sostoyaniya terminala.
+
+## Скриншоты для отчёта
+
+[Открыть все скриншоты (29 PNG)](screenshots/README.md)
