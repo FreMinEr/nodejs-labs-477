@@ -11,3 +11,7 @@
 Задание 4 демонстрирует commit, abort, проверку отсутствия отменённой записи, insert/update/replace/delete Change Stream. На одном узле secondary отсутствует; secondaryPreferred читает primary.
 
 API задания 5: /api/students (CRUD), /stats, /search?q=..., /batch; /api/metrics. WebSocket порт 3001, HTTP 3000. Кэш 60 секунд очищается при HTTP-изменениях и внешних событиях Change Stream. JSON Schema действует в БД, валидация также выполняется приложением. Ошибки 400/404/409. Остановка Ctrl+C закрывает сервер, stream, WebSocket и клиент MongoDB.
+
+## Скриншоты для отчёта
+
+[Открыть все скриншоты (33 PNG)](screenshots/README.md)
