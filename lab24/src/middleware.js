@@ -1,0 +1,6 @@
+const schemas = require('./validation');
+const errors = async (ctx, next) => { ctx.set('X-Group', '477'); try { await next(); if (ctx.status === 404 && !ctx.body) { ctx.body = { data: null, error: 'Marshrut ne naiden', status: 404 }; ctx.status = 404; } } catch (error) { ctx.status = error.code === 11000 ? 409 : error.status || (error.code === 'LIMIT_FILE_SIZE' ? 413 : 500); ctx.body = { data: null, error: ctx.status === 500 ? 'Vnutrennyaya oshibka' : error.code === 11000 ? 'Email uzhe sushchestvuet' : error.message, status: ctx.status, ...(error.details ? { details: error.details } : {}) }; } };
+const database = db => async (ctx, next) => { ctx.db = db; await next(); };
+const validation = (schema, target = 'body') => async (ctx, next) => { const value = schemas.check(schema, target === 'body' ? ctx.request.body : ctx.query); if (target === 'body') ctx.request.body = value; else ctx.state.query = value; await next(); };
+const logger = (log, counter) => async (ctx, next) => { try { await next(); } finally { counter.inc({ method: ctx.method, path: ctx._matchedRoute || 'unmatched', status: String(ctx.status) }); log({ method: ctx.method, path: ctx.path, status: ctx.status }, 'Zapros obrabotan'); } };
+module.exports = { errors, database, validation, logger };

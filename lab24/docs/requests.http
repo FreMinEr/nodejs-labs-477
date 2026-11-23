@@ -1,0 +1,11 @@
+GET http://localhost:3000/health
+
+GET http://localhost:3000/api/users?page=1&limit=5&group_name=477
+
+GET http://localhost:3000/api/users/search?q=Ivan
+
+GET http://localhost:3000/api/users/stats
+
+GET http://localhost:3000/api/users/export
+
+GET http://localhost:3000/metrics
