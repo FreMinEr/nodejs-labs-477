@@ -1,0 +1,3 @@
+import { single, pool } from './config/db.js';
+const query = 'SELECT VERSION() version, DATABASE() db, CURRENT_USER() user';
+try { const connection = await single(process.argv.includes('--bad-password') ? { password: 'incorrect-demo-password' } : {}); try { console.log('Odinochnoe podklyuchenie ustanovleno', (await connection.query(query))[0]); } finally { await connection.end(); console.log('Soedinenie zakryto'); } if (!process.argv.includes('--bad-password')) { const db = pool(); try { console.log('Pul: limit 10, soedineniya sozdayutsya po mere neobhodimosti'); console.log((await db.query(query))[0]); } finally { await db.end(); } } } catch (error) { console.error(`Oshibka podklyucheniya: ${error.code}`); process.exitCode = 1; }
