@@ -13,3 +13,7 @@ Node.js 22+. Ustanovka: `npm ci`. Zapusk iz papki lab15: `npm run task1` ... `np
 Proverka: `npm test`. Testy zapuskayut vse pyat serverov cherez Node.js na svobodnyh portah, proveryayut CRUD, validaciyu, poisk, sortirovku, paginaciyu i obrabotku oshibok.
 
 Snimki realnyh HTTP-otvetov i logov: `../screenshots_lab15/` otnositelno kornya repozitoriya. V metodichke 15 net otdelnogo spiska snimkov, poetomu sohraneny vse proverennye scenarii po zadaniyam.
+
+## Скриншоты для отчёта
+
+[Открыть все скриншоты (16 PNG)](screenshots/README.md)
