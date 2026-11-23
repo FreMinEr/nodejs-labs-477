@@ -11,3 +11,7 @@ Parfenok Ivan Nikolaevich, gruppa 477, variant 17. Node.js 22+, bez vneshnih zav
 5. EventBus: prioritet, stabilnyi poryadok, once, onAny/offAny, off, metriki, sync/async oshibki. GET /metrics uchityvaet tekushchii HTTP-zapros; raz v 2 sekundy sobytie system s dannymi os. Vremya poslednego vyzova i schetchiki oshibok vhodyat v metriki.
 
 `npm test` proveryaet prioritet, reentrant once, wildcard, otpiski, sync/async oshibki i nezavisimost kopii metrik.
+
+## Скриншоты для отчёта
+
+[Открыть все скриншоты (24 PNG)](screenshots/README.md)
