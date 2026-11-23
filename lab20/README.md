@@ -9,3 +9,7 @@ Node.js 22+: `npm ci`, затем `npm run task1` … `npm run task5`. Пере�
 Задания: базовые страницы; заголовки; тела до 1 MiB; таблица маршрутов и CRUD студентов; middleware, статика, ETag/Last-Modified, кэш GET API на 60 секунд с очисткой при изменениях, HTTPS, поток 10 MiB, access.log и /metrics. Данные студентов хранятся в памяти. Пути с `..`, включая закодированные, отклоняются до нормализации URL; realpath проверяет выход за public через ссылки.
 
 Для path traversal используйте `curl.exe --path-as-is http://127.0.0.1:3000/static/../secret.txt`. `curl.exe -I` проверяет HEAD. `/middleware-error` демонстрирует обработку исключения с HTTP 500. X-Group содержит 477 (значения HTTP-заголовков должны быть совместимы с HTTP).
+
+## Скриншоты для отчёта
+
+[Открыть все скриншоты (33 PNG)](screenshots/README.md)
