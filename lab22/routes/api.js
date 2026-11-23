@@ -1,0 +1,11 @@
+import Router from '@koa/router';
+import * as students from '../controllers/students.js';
+import { StudentDAO } from '../models/student-dao.js';
+import { metrics } from '../config/db.js';
+export const router = new Router();
+router.get('/api/students/stats', students.stats).post('/api/students/batch', students.many);
+router.get('/api/students', students.list).get('/api/students/:id', students.get).post('/api/students', students.create).put('/api/students/:id', students.update).delete('/api/students/:id', students.remove);
+router.get('/api/groups', async ctx => { ctx.body = (await ctx.db.query('SELECT * FROM student_groups ORDER BY id'))[0]; });
+router.post('/api/groups', async ctx => { const name = ctx.request.body.name; if (typeof name !== 'string' || !/^(?:\d{3}|ББМО-\d{2}-\d{2})$/.test(name)) ctx.throw(400, 'Nevernyi format gruppy'); const [result] = await ctx.db.execute('INSERT INTO student_groups(name) VALUES(?)', [name]); ctx.status = 201; ctx.body = { id: result.insertId, name }; });
+router.get('/api/groups/:id/students', async ctx => { const [rows] = await ctx.db.execute('SELECT name FROM student_groups WHERE id=?', [ctx.params.id]); if (!rows.length) ctx.throw(404, 'Gruppa ne naidena'); ctx.body = await new StudentDAO(ctx.db).findAll({ ...ctx.query, group_name: rows[0].name }); });
+router.get('/api/metrics', ctx => { ctx.body = { group: '477', queries: metrics.queries, errors: metrics.errors, avgTime: metrics.queries ? metrics.milliseconds / metrics.queries : 0 }; });
