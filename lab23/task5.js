@@ -1,0 +1,13 @@
+import Koa from 'koa';
+import bodyParser from 'koa-bodyparser';
+import { connect } from './config/db.js';
+import { setup } from './models/student.js';
+import { errors, database, logger, cache } from './middleware/common.js';
+import { router } from './routes/api.js';
+import { changes } from './streams/changes.js';
+const { client, db } = await connect();
+await setup(db); const closeChanges = changes(db);
+const app = new Koa(); app.use(errors).use(bodyParser({ jsonLimit: '1mb' })).use(database(db, client)).use(logger).use(cache).use(router.routes()).use(router.allowedMethods());
+const server = app.listen(Number(process.env.PORT ?? 3000), '127.0.0.1', () => console.log(`Koa server: ${server.address().port}`));
+server.on('error', async error => { console.error(`Oshibka servera: ${error.code}`); await closeChanges(); await client.close(); process.exitCode = 1; });
+const stop = () => server.close(async () => { await closeChanges(); await client.close(); console.log('Server zakryt'); }); process.once('SIGINT', stop); process.once('SIGTERM', stop);
