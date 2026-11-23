@@ -17,3 +17,7 @@
 Docker: заполнить JWT_SECRET, JWT_REFRESH_SECRET, DB_PASSWORD, MONGO_ROOT_PASSWORD в .env; `docker compose up --build -d --wait`. MongoDB не публикует порт наружу, приложение использует пользователя student с readWrite только на lab24. Многоэтапный образ node:22-alpine, процесс работает от пользователя node. Для HTTPS с собственным доменом: задать DOMAIN и добавить `-f docker-compose.yml -f docker-compose.production.yml`; Caddy завершает TLS.
 
 Workflow хранится внутри lab24/.github/workflows/ci.yml. Чтобы не менять корень общего репозитория, его рабочая копия размещается в отдельном [репозитории CI](https://github.com/FreMinEr/nodejs-labs-477-ci/actions). Он проверяет feature/lab-24, собирает Docker, запускает временный staging на GitHub runner, выполняет HTTP-проверки, публикует образ GHCR и сохраняет отчёты. Временный staging выключается после проверки; постоянный внешний сервер и домен не предоставлялись.
+
+## Скриншоты для отчёта
+
+[Открыть все скриншоты (39 PNG)](screenshots/README.md)
