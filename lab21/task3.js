@@ -1,0 +1,20 @@
+import { createReadStream, createWriteStream } from 'node:fs';
+import { mkdir, writeFile, readFile } from 'node:fs/promises';
+import { pipeline } from 'node:stream/promises';
+import { Transform } from 'node:stream';
+import { once } from 'node:events';
+import { UpperCaseTransform } from './transforms.js';
+await mkdir('data', { recursive: true }); await writeFile('data/input.txt', 'Gruppa 477\nParfenok Ivan Nikolaevich\n');
+const first = createWriteStream('data/output-pipe.txt'); createReadStream('data/input.txt').pipe(first); await once(first, 'finish');
+console.log(`PIPE uspeh: ${(await readFile('data/input.txt')).equals(await readFile('data/output-pipe.txt'))}`);
+const missing = createReadStream('data/missing.txt'), open = createWriteStream('data/error-pipe.txt');
+const failed = new Promise(resolve => missing.once('error', error => resolve(error.code))); missing.pipe(open);
+console.log(`PIPE oshibka: ${await failed}; destination.destroyed=${open.destroyed}`); open.destroy();
+await pipeline(createReadStream('data/input.txt'), createWriteStream('data/output-pipeline.txt'));
+console.log(`PIPELINE uspeh: ${(await readFile('data/input.txt')).equals(await readFile('data/output-pipeline.txt'))}`);
+const source = createReadStream('data/missing.txt'), target = createWriteStream('data/error-pipeline.txt');
+try { await pipeline(source, target); } catch (error) { console.log(`PIPELINE oshibka: ${error.code}; source.destroyed=${source.destroyed}; destination.destroyed=${target.destroyed}`); }
+const reverse = new Transform({ objectMode: true, transform(line, encoding, callback) { callback(null, [...line.trimEnd()].reverse().join('') + '\n'); } });
+await pipeline(createReadStream('data/input.txt'), new UpperCaseTransform(), reverse, createWriteStream('data/output-chain.txt'));
+console.log('CHAIN input -> uppercase -> reverse -> output');
+for (const file of ['output-pipe.txt', 'output-pipeline.txt', 'output-chain.txt']) console.log(`${file}:\n${await readFile('data/' + file, 'utf8')}`);
