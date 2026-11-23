@@ -1,0 +1,22 @@
+{
+  "name": "lab23-mongodb",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "task1": "node --env-file-if-exists=.env task1.js",
+    "task2": "node --env-file-if-exists=.env task2.js",
+    "task3": "node --expose-gc --env-file-if-exists=.env task3.js",
+    "task4": "node --env-file-if-exists=.env task4.js",
+    "task5": "node --env-file-if-exists=.env task5.js",
+    "start": "npm run task5",
+    "test": "node --env-file-if-exists=.env verify.js"
+  },
+  "dependencies": {
+    "mongodb": "6.16.0",
+    "koa": "2.16.1",
+    "@koa/router": "13.1.1",
+    "koa-bodyparser": "4.4.1",
+    "ws": "8.18.2"
+  }
+}
