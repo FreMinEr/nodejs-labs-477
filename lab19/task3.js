@@ -1,0 +1,10 @@
+import { DatabaseConnection } from './database.js';
+const db = new DatabaseConnection();
+if (process.argv.includes('--unhandled')) db.error(new Error('Oshibka bez slushatelya error'));
+db.on('connect', () => console.log('[477] connect: soedinenie ustanovleno'));
+db.on('query', (sql, result) => console.log(`[477] query: ${sql}; rezultat: ${Array.isArray(result) ? result.length + ' zapisei' : JSON.stringify(result)}`));
+db.on('close', () => console.log('[477] close: soedinenie zakryto'));
+db.on('error', error => console.log(`[477] error obrabotan: ${error.message}`));
+console.log('Uchebnaya model bazy v pamyati');
+db.connect(); db.query('SELECT * FROM students'); db.query('INSERT INTO students'); db.close();
+db.error(new Error('Isteklo vremya ozhidaniya'));
