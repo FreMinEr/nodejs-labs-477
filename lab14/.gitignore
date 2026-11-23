@@ -1,0 +1,11 @@
+node_modules/
+.env
+student_*.txt
+project_*/
+report_*.json
+data_*.txt
+processed_*.txt
+source_*/
+backup_*/
+backup_*.zip
+sync_report_*.txt
